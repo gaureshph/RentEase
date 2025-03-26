@@ -24,7 +24,7 @@ const Recommendations = () => {
 
   return (
     <Container className="mt-5">
-      <h2 className="text-center text-success mb-4">Available Items</h2>
+      <h2 className="text-center text-success mb-4">Recommendations</h2>
       <Row>
         {listings.length > 0 ? (
           listings.map((item, index) => (
