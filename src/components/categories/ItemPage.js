@@ -59,7 +59,7 @@ const ItemPage = () => {
           >
             <div>{item.title}</div>
             <div>
-              <strong style={{ fontSize: 18 }}>${item.price}</strong>/day
+              <strong style={{ fontSize: 18 }}>₹{item.price}</strong>/day
             </div>
           </div>
           <div
@@ -73,7 +73,7 @@ const ItemPage = () => {
           >
             <div>{item.security_deposit}</div>
             <div>
-              <strong style={{ fontSize: 18 }}>${item.security_deposit}</strong>
+              <strong style={{ fontSize: 18 }}>₹{item.security_deposit}</strong>
             </div>
           </div>
           <div

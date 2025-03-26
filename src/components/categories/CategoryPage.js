@@ -35,7 +35,7 @@ const CategoryPage = () => {
                 <Card.Img variant="top" src={item.images && item.images.length > 0 
                     && `http://localhost:5000/uploads/${item.images[0]}`} crossOrigin="anonymous" />
                 <Card.Body>
-                  <Card.Text><strong style={{fontSize: 18}}>${item.price}</strong>/day</Card.Text>
+                  <Card.Text><strong style={{fontSize: 18}}>₹{item.price}</strong>/day</Card.Text>
                   <Card.Title>{item.title}</Card.Title>
                   <Card.Text>{item.product_description}</Card.Text>
                   <Card.Text><FaMapMarkerAlt size={18} /> {item.city}, {item.state}</Card.Text>

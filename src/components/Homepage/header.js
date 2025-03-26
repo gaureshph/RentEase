@@ -11,7 +11,7 @@ import { FaSearch, FaUserCircle, FaMapMarkerAlt, FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import authService from "../../services/authService";
 import "../css/header.css";
-import icon from "../../images/icon.jpeg";
+import icon from "../../images/icon-square.jpeg";
 
 const RentEaseNavbar = () => {
   const navigate = useNavigate();
