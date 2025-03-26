@@ -36,8 +36,8 @@ router.post("/listings", upload.array("images", 10), async (req, res) => {
       city: req.body.city,
       location: req.body.location,
       item_condition: req.body.item_condition,
-      renter_id: req.body.userId, // Temporary
-      security_deposit: parseFloat(req.body.price) * 0.2,
+      renter_id: req.body.userId,
+      security_deposit: parseFloat(req.body.securityDeposit),
       availability: true
     };
 
