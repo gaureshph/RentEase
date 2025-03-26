@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 const ItemPage = () => {
   const { itemId } = useParams(); // Get category from URL
   const [item, setItem] = useState({});
+  const navigate = useNavigate(); // Initialize navigate
+
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -36,6 +38,14 @@ const ItemPage = () => {
             }
             crossOrigin="anonymous"
           />
+            <Button
+            variant="success"
+            style={{ width: "100%", marginTop: 20, height: 50 }}
+            onClick={() => navigate("/address")} // Now navigate is defined
+          >
+            Rent Now
+          </Button>
+        
         </Col>
         <Col>
           <div
@@ -50,6 +60,20 @@ const ItemPage = () => {
             <div>{item.title}</div>
             <div>
               <strong style={{ fontSize: 18 }}>${item.price}</strong>/day
+            </div>
+          </div>
+          <div
+            style={{
+              border: "0.5px solid black",
+              borderRadius: 4,
+              width: "400px",
+              padding: "20px",
+              marginBottom: "20px",
+            }}
+          >
+            <div>{item.security_deposit}</div>
+            <div>
+              <strong style={{ fontSize: 18 }}>${item.security_deposit}</strong>
             </div>
           </div>
           <div
@@ -81,7 +105,9 @@ const ItemPage = () => {
             <ul>
               {item &&
                 item.item_condition &&
-                item.item_condition.map((condition) => <li>{condition}</li>)}
+                item.item_condition.map((condition, index) => (
+                  <li key={index}>{condition}</li>
+                ))}
             </ul>
           </div>
         </Col>

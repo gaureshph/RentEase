@@ -13,6 +13,8 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import ItemPage from "./components/categories/ItemPage";
 import MyListingsPage from "./components/categories/MyListingsPage";
+import AddressPage from "./components/categories/AddressPage";
+
 
 function App() {
   return (
@@ -34,7 +36,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/my-listings" element={<MyListingsPage />} />
+        <Route path="/item/:itemId" element={<ItemPage />} />
+        <Route path="/address" element={<AddressPage />} />
       </Routes>
+
     </Router>
   );
 }
