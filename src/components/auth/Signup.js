@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Alert, Card } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import authService from '../../services/authService';
+import React, { useState } from "react";
+import { Form, Button, Container, Alert, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import authService from "../../services/authService";
 
 const Signup = () => {
+  const [role, setRole] = useState("");
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,20 +21,31 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
     try {
-      await authService.register(formData.username, formData.email, formData.password);
-      navigate('/login');
+      await authService.register(
+        formData.username,
+        formData.email,
+        formData.password,
+        role
+      );
+      navigate("/login");
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setError(err.response?.data?.message || "Registration failed");
     }
   };
 
   return (
     <Container className="d-flex justify-content-center align-items-center vh-100">
-      <Card style={{ width: '26rem', padding: '20px', boxShadow: '0px 4px 10px rgba(0,0,0,0.2)' }}>
+      <Card
+        style={{
+          width: "26rem",
+          padding: "20px",
+          boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+        }}
+      >
         <Card.Body>
           <h2 className="text-center">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
@@ -80,6 +92,41 @@ const Signup = () => {
                 onChange={handleChange}
                 required
               />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Role</Form.Label>
+              <div className="custom-select">
+                <Form.Select
+                  className="form-control"
+                  value={role}
+                  onChange={(e) => {
+                    setRole(e.target.value);
+                  }}
+                  required
+                  style={{
+                    appearance: "none",
+                  }}
+                >
+                  <option value="" disabled className="placeholder-option">
+                    Choose a role
+                  </option>
+                  <option
+                    key="Lister"
+                    value="Lister"
+                    style={{ color: "var(--forest-deep)" }}
+                  >
+                    Lister
+                  </option>
+                  <option
+                    key="Renter"
+                    value="Renter"
+                    style={{ color: "var(--forest-deep)" }}
+                  >
+                    Renter
+                  </option>
+                </Form.Select>
+              </div>
             </Form.Group>
 
             <Button variant="primary" type="submit" className="w-100">

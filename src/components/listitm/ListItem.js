@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 import axios from "axios";
@@ -24,14 +24,36 @@ const ListItem = () => {
     images: [],
   });
   const [errorMessage, setErrorMessage] = useState("");
-  
+
   const states = [
-    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
-    "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
-    "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya",
-    "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim",
-    "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand",
-    "West Bengal"
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
   ];
 
   const additionalCondition = [
@@ -39,28 +61,30 @@ const ListItem = () => {
     "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
     "Valid ID Proof Required.",
     "Any damage to the product should be informed before returning.",
-    "Before modifying/changing/altering anything, take permission."
+    "Before modifying/changing/altering anything, take permission.",
   ];
 
-  const commoncondtionfurniture=[
+  const commoncondtionfurniture = [
     "Refundable security deposit ( after 7-day inspection)",
     "Professional deep cleaning before return",
     "No drilling/nailing/sanding without written consent",
     "Weight limits strictly enforced (see item specifications)",
     "Pest control mandatory for wooden items",
     "Original packaging required ",
-    "No outdoor use unless explicitly approved",  additionalCondition
+    "No outdoor use unless explicitly approved",
+    additionalCondition,
   ];
 
-  const commoncondtiontool=[
+  const commoncondtiontool = [
     "Refundablesecurity deposit ( after 3-day inspection)",
     "Use only manufacturer-approved accessories",
     "No modifications to original equipment",
     "Environmental compliance - proper disposal of waste/debris",
-    "Penalty for misuse", additionalCondition
+    "Penalty for misuse",
+    additionalCondition,
   ];
 
-  const commoncondtinshop=[
+  const commoncondtinshop = [
     "Refundable security deposit ( after 15-day inspection)",
     "Valid ID proof copy required.",
     "Valid GST registration & trade license required",
@@ -71,7 +95,7 @@ const ListItem = () => {
     "Business hours restricted to 7AM-11PM",
   ];
 
-  const commoncondtionmachine=[
+  const commoncondtionmachine = [
     "Refundable security deposit ( after 7-day inspection)",
     "Valid ITI/NCVT operator certification required.",
     "Use only manufacturer-recommended fuel/lubricants.",
@@ -82,7 +106,7 @@ const ListItem = () => {
     "Return all original manuals/service records",
   ];
 
-  const commoncondtionhouse=[
+  const commoncondtionhouse = [
     "Refundable  security deposit ( after 30-day inspection)",
     "Valid ID copy required",
     "No structural modifications without written consent",
@@ -91,7 +115,7 @@ const ListItem = () => {
     "Police verification certificate mandatory",
     "No illegal/immoral activities (immediate termination)",
     "Maintain property tax receipts & EB bills",
-  ]; 
+  ];
 
   const conditions = {
     Vehicles: {
@@ -104,9 +128,9 @@ const ListItem = () => {
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission."
-      ], 
-      "Electric Car":[
+        "Before modifying/changing/altering anything, take permission.",
+      ],
+      "Electric Car": [
         "80% minimum battery charge at return",
         "Battery health report required",
         "No third-party charging stations",
@@ -114,121 +138,132 @@ const ListItem = () => {
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission.",  additionalCondition
+        "Before modifying/changing/altering anything, take permission.",
+        additionalCondition,
       ],
-      "Bike": [
+      Bike: [
         "Speed limit: 60km/h (city), 80km/h (highway)",
-        "Odometer reading at pickup/return", 
+        "Odometer reading at pickup/return",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission.", additionalCondition
+        "Before modifying/changing/altering anything, take permission.",
+        additionalCondition,
       ],
-      "Scooter": [
+      Scooter: [
         "Daily battery charging mandatory",
         "Rain cover provided (₹500 penalty if missing)",
         "No electrical modifications",
-        "Parking only in secured lots after 8PM", 
+        "Parking only in secured lots after 8PM",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission.", additionalCondition
+        "Before modifying/changing/altering anything, take permission.",
+        additionalCondition,
       ],
       "Commercial Vehicle": [
         "Max load: 1.5 tonnes",
         "Driver logbook maintenance",
         "Weekly engine oil checks",
-        "No construction waste transport", 
+        "No construction waste transport",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission."  , additionalCondition
+        "Before modifying/changing/altering anything, take permission.",
+        additionalCondition,
       ],
       "Truck/Tempo": [
         "CNG safety certificate required",
         "No passenger overloading",
         "Daily interior sanitization",
-        "Meter calibration proof", 
+        "Meter calibration proof",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission.", additionalCondition
+        "Before modifying/changing/altering anything, take permission.",
+        additionalCondition,
       ],
-      "Cycle": [
+      Cycle: [
         "No off-road usage",
-        "Basket/seat cover mandatory", 
+        "Basket/seat cover mandatory",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission.", additionalCondition
+        "Before modifying/changing/altering anything, take permission.",
+        additionalCondition,
       ],
       "Auto-Rickshaw": [
         "Fare meter functional certification",
         "Daily CNG tank pressure check",
         "No night driving (10PM-6AM)",
-        "Passenger insurance mandatory", 
+        "Passenger insurance mandatory",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission.", additionalCondition
-      ]
+        "Before modifying/changing/altering anything, take permission.",
+        additionalCondition,
+      ],
     },
     Electronics: {
-      "TV": [
-        "Screen protector must remain intact", 
-        "No permanent wall mounting allowed", 
-        "Burn-in protection settings enabled",  
+      TV: [
+        "Screen protector must remain intact",
+        "No permanent wall mounting allowed",
+        "Burn-in protection settings enabled",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission.", additionalCondition
+        "Before modifying/changing/altering anything, take permission.",
+        additionalCondition,
       ],
-      "Fridge": [
-        "Weekly defrosting required", 
+      Fridge: [
+        "Weekly defrosting required",
         "Temperature setting locked between 2-4°C",
         "No food storage during return transit",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission.", additionalCondition
+        "Before modifying/changing/altering anything, take permission.",
+        additionalCondition,
       ],
-      "Laptop": [
-        "BIOS password setup required", 
-        "Gaming limited to 4hrs/day", 
-        "OS must be rolled back to original state", 
+      Laptop: [
+        "BIOS password setup required",
+        "Gaming limited to 4hrs/day",
+        "OS must be rolled back to original state",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission.", additionalCondition
+        "Before modifying/changing/altering anything, take permission.",
+        additionalCondition,
       ],
-      "Camera": [
-        "UV filter mandatory (provided)", 
-        "Memory card formatting after use", 
-        "No lens swapping without approval",  
+      Camera: [
+        "UV filter mandatory (provided)",
+        "Memory card formatting after use",
+        "No lens swapping without approval",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
-        "Before modifying/changing/altering anything, take permission.", additionalCondition
+        "Before modifying/changing/altering anything, take permission.",
+        additionalCondition,
       ],
-      "Tablets": [
-        "Kids mode restrictions enabled", 
+      Tablets: [
+        "Kids mode restrictions enabled",
         "No jailbreaking/rooting allowed",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
         "Before modifying/changing/altering anything, take permission.",
-         additionalCondition
+        additionalCondition,
       ],
       "Audio Visual Equipment": [
         "50% volume limit after 10PM",
@@ -238,29 +273,29 @@ const ListItem = () => {
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
         "Before modifying/changing/altering anything, take permission.",
-         additionalCondition
+        additionalCondition,
       ],
-      "Printers": [
-        "Monthly 500 sheet limit", 
-        "Genuine ink only policy", 
-        "No heavy cardstock printing", 
+      Printers: [
+        "Monthly 500 sheet limit",
+        "Genuine ink only policy",
+        "No heavy cardstock printing",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
         "Before modifying/changing/altering anything, take permission.",
-        additionalCondition
+        additionalCondition,
       ],
-      "Smartwatches": [
-        "Charging cable deposit ₹800", 
-        "No swimming/shower use", 
-        "Health data auto-delete enabled",  
+      Smartwatches: [
+        "Charging cable deposit ₹800",
+        "No swimming/shower use",
+        "Health data auto-delete enabled",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
         "Before modifying/changing/altering anything, take permission.",
-        additionalCondition
+        additionalCondition,
       ],
       "Wireless Microphones": [
         "Any damage to the product will result in no refund of the deposit.",
@@ -268,60 +303,60 @@ const ListItem = () => {
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
         "Before modifying/changing/altering anything, take permission.",
-         additionalCondition
+        additionalCondition,
       ],
-      "Mixers": [
-        "Max 2hr continuous operation", 
-        "No grinding hard spices", 
-        "Weekly lubrication required", 
+      Mixers: [
+        "Max 2hr continuous operation",
+        "No grinding hard spices",
+        "Weekly lubrication required",
         "Any damage to the product will result in no refund of the deposit.",
         "If the repair cost exceeds the deposit, the renter must pay the extra amount.",
         "Valid ID Proof Required.",
         "Any damage to the product should be informed before returning.",
         "Before modifying/changing/altering anything, take permission.",
-        additionalCondition, 
-      ]
+        additionalCondition,
+      ],
     },
     Furniture: {
-      "Sofa": [
+      Sofa: [
         "Anti-stain spray application (provided)",
         "No food/drinks allowed on fabric surfaces",
-        "Professional upholstery cleaning every 3 months", 
-         "Refundable security deposit ( after 7-day inspection)",
-          "Professional deep cleaning before return",
-          "No drilling/nailing/sanding without written consent",
-          "Weight limits strictly enforced (see item specifications)",
-          "Pest control mandatory for wooden items",
-          "Original packaging required ",
-          "No outdoor use unless explicitly approved",
-         additionalCondition, 
-      ],
-      "Bed": [
-        "Waterproof mattress protector mandatory",
-        "Monthly mattress rotation required",
-        "No jumping/standing on bed frame", 
-        "Refundable security deposit ( after 7-day inspection)",
-          "Professional deep cleaning before return",
-          "No drilling/nailing/sanding without written consent",
-          "Weight limits strictly enforced (see item specifications)",
-          "Pest control mandatory for wooden items",
-          "Original packaging required ",
-          "No outdoor use unless explicitly approved", 
-         additionalCondition,
-      ],
-      "Office Furniture": [
-        "Cable management proof required",
-        "No heavy equipment (>25kg) without base support", 
+        "Professional upholstery cleaning every 3 months",
         "Refundable security deposit ( after 7-day inspection)",
         "Professional deep cleaning before return",
         "No drilling/nailing/sanding without written consent",
         "Weight limits strictly enforced (see item specifications)",
         "Pest control mandatory for wooden items",
         "Original packaging required ",
-        "No outdoor use unless explicitly approved", 
-        additionalCondition, 
+        "No outdoor use unless explicitly approved",
+        additionalCondition,
       ],
-      "Dining Set" : [
+      Bed: [
+        "Waterproof mattress protector mandatory",
+        "Monthly mattress rotation required",
+        "No jumping/standing on bed frame",
+        "Refundable security deposit ( after 7-day inspection)",
+        "Professional deep cleaning before return",
+        "No drilling/nailing/sanding without written consent",
+        "Weight limits strictly enforced (see item specifications)",
+        "Pest control mandatory for wooden items",
+        "Original packaging required ",
+        "No outdoor use unless explicitly approved",
+        additionalCondition,
+      ],
+      "Office Furniture": [
+        "Cable management proof required",
+        "No heavy equipment (>25kg) without base support",
+        "Refundable security deposit ( after 7-day inspection)",
+        "Professional deep cleaning before return",
+        "No drilling/nailing/sanding without written consent",
+        "Weight limits strictly enforced (see item specifications)",
+        "Pest control mandatory for wooden items",
+        "Original packaging required ",
+        "No outdoor use unless explicitly approved",
+        additionalCondition,
+      ],
+      "Dining Set": [
         "Heat-resistant pads compulsory",
         "Refundable security deposit ( after 7-day inspection)",
         "Professional deep cleaning before return",
@@ -329,10 +364,10 @@ const ListItem = () => {
         "Weight limits strictly enforced (see item specifications)",
         "Pest control mandatory for wooden items",
         "Original packaging required ",
-        "No outdoor use unless explicitly approved", 
+        "No outdoor use unless explicitly approved",
         additionalCondition,
       ],
-      "Bookshelf": [
+      Bookshelf: [
         "Wall anchoring mandatory",
         "Load distribution guidelines provided",
         "No encyclopedia/weighty book overloading",
@@ -342,12 +377,12 @@ const ListItem = () => {
         "Weight limits strictly enforced (see item specifications)",
         "Pest control mandatory for wooden items",
         "Original packaging required ",
-        "No outdoor use unless explicitly approved", 
-        additionalCondition, 
+        "No outdoor use unless explicitly approved",
+        additionalCondition,
       ],
     },
-    Machines:{
-      "Construction":[
+    Machines: {
+      Construction: [
         "Max 12-hour daily operation",
         "Soil compaction test required",
         "Refundable security deposit ( after 7-day inspection)",
@@ -358,9 +393,9 @@ const ListItem = () => {
         "Environmental compliance - proper disposal of waste/oil as per CPCB norms",
         "Transportation by company-approved handlers only",
         "Return all original manuals/service records",
-        additionalCondition, 
+        additionalCondition,
       ],
-      "Manufacturing": [
+      Manufacturing: [
         "Temperature control (22°C-28°C) mandatory",
         "Coolant pH monitoring twice daily",
         "Refundable security deposit ( after 7-day inspection)",
@@ -371,7 +406,7 @@ const ListItem = () => {
         "Environmental compliance - proper disposal of waste/oil as per CPCB norms",
         "Transportation by company-approved handlers only",
         "Return all original manuals/service records",
-        additionalCondition, 
+        additionalCondition,
       ],
       manufacturing: [
         "Temperature control (22°C-28°C) mandatory",
@@ -397,7 +432,7 @@ const ListItem = () => {
         "Environmental compliance - proper disposal of waste/oil as per CPCB norms",
         "Transportation by company-approved handlers only",
         "Return all original manuals/service records",
-        additionalCondition, 
+        additionalCondition,
       ],
       medical: [
         "Sterilization certificate after each use",
@@ -412,8 +447,8 @@ const ListItem = () => {
         "Environmental compliance - proper disposal of waste/oil as per CPCB norms",
         "Transportation by company-approved handlers only",
         "Return all original manuals/service records",
-        additionalCondition, 
-      ]
+        additionalCondition,
+      ],
     },
     Costumes: {
       "Bridal Wear": [
@@ -429,9 +464,9 @@ const ListItem = () => {
         "Environmental compliance - proper disposal of waste/oil as per CPCB norms",
         "Transportation by company-approved handlers only",
         "Return all original manuals/service records",
-        additionalCondition
+        additionalCondition,
       ],
-      "Vintage": [
+      Vintage: [
         "Climate-controlled transport only.",
         "Max 8-hour wear duration.",
         "Touch gloves provided (₹1000 deposit).",
@@ -444,7 +479,7 @@ const ListItem = () => {
         "Environmental compliance - proper disposal of waste/oil as per CPCB norms",
         "Transportation by company-approved handlers only",
         "Return all original manuals/service records",
-        additionalCondition
+        additionalCondition,
       ],
       "Party Costumes": [
         "₹1000/day late return penalty",
@@ -458,7 +493,7 @@ const ListItem = () => {
         "Environmental compliance - proper disposal of waste/oil as per CPCB norms",
         "Transportation by company-approved handlers only",
         "Return all original manuals/service records",
-        additionalCondition
+        additionalCondition,
       ],
       "Traditional Attire": [
         "No heavy jewelry attachments",
@@ -472,7 +507,7 @@ const ListItem = () => {
         "Environmental compliance - proper disposal of waste/oil as per CPCB norms",
         "Transportation by company-approved handlers only",
         "Return all original manuals/service records",
-        additionalCondition
+        additionalCondition,
       ],
       "Children's Costumes": [
         "Size verification via height/weight",
@@ -485,7 +520,7 @@ const ListItem = () => {
         "Environmental compliance - proper disposal of waste/oil as per CPCB norms",
         "Transportation by company-approved handlers only",
         "Return all original manuals/service records",
-        additionalCondition
+        additionalCondition,
       ],
       "Cosplay/Props": [
         "Weapon replica certification required",
@@ -498,108 +533,108 @@ const ListItem = () => {
         "Environmental compliance - proper disposal of waste/oil as per CPCB norms",
         "Transportation by company-approved handlers only",
         "Return all original manuals/service records",
-        additionalCondition
+        additionalCondition,
       ],
     },
     Shop: {
-      "Retail": [
-      "Refundable security deposit ( after 15-day inspection)",
-      "Valid ID proof copy required.",
-      "Valid GST registration & trade license required",
-      "No structural modifications without written consent",
-      "Maintain exterior cleanliness",
-      "No illegal/subletting activities (immediate termination)",
-      "Signage compliance with local municipal laws",
-      "Business hours restricted to 7AM-11PM",
-      additionalCondition
-      ],
-      "Food": [
-          "FSSAI license mandatory (displayed)",
-          "Daily pest control certification",
-          "Wet waste management contract required",
-          "Refundable security deposit ( after 15-day inspection)",
-          "Valid ID proof copy required.",
-           "Valid GST registration & trade license required",
-          "No structural modifications without written consent",
-          "Maintain exterior cleanliness",
-          "No illegal/subletting activities (immediate termination)",
-          "Signage compliance with local municipal laws",
+      Retail: [
+        "Refundable security deposit ( after 15-day inspection)",
+        "Valid ID proof copy required.",
+        "Valid GST registration & trade license required",
+        "No structural modifications without written consent",
+        "Maintain exterior cleanliness",
+        "No illegal/subletting activities (immediate termination)",
+        "Signage compliance with local municipal laws",
         "Business hours restricted to 7AM-11PM",
-        additionalCondition
+        additionalCondition,
       ],
-      "Office": [
+      Food: [
+        "FSSAI license mandatory (displayed)",
+        "Daily pest control certification",
+        "Wet waste management contract required",
+        "Refundable security deposit ( after 15-day inspection)",
+        "Valid ID proof copy required.",
+        "Valid GST registration & trade license required",
+        "No structural modifications without written consent",
+        "Maintain exterior cleanliness",
+        "No illegal/subletting activities (immediate termination)",
+        "Signage compliance with local municipal laws",
+        "Business hours restricted to 7AM-11PM",
+        additionalCondition,
+      ],
+      Office: [
         "Cable management certification",
         "No after-hours AC usage (9PM-7AM)",
         "Server room fire suppression system check",
         "Refundable security deposit ( after 15-day inspection)",
-         "Valid ID proof copy required.",
+        "Valid ID proof copy required.",
         "Valid GST registration & trade license required",
-          "No structural modifications without written consent",
+        "No structural modifications without written consent",
         "Maintain exterior cleanliness",
         "No illegal/subletting activities (immediate termination)",
         "Signage compliance with local municipal laws",
-         "Business hours restricted to 7AM-11PM",
-         additionalCondition
+        "Business hours restricted to 7AM-11PM",
+        additionalCondition,
       ],
-      "Warehouse": [
+      Warehouse: [
         "Fire safety audit certificate (updated quarterly)",
         "No hazardous material storage",
         "Loading dock time restrictions (8AM-8PM)",
         "Pallet racking load limit compliance",
         "Refundable security deposit ( after 15-day inspection)",
-          "Valid ID proof copy required.",
-        "Valid GST registration & trade license required",
-        "No structural modifications without written consent",
-         "Maintain exterior cleanliness",
-          "No illegal/subletting activities (immediate termination)",
-          "Signage compliance with local municipal laws",
-          "Business hours restricted to 7AM-11PM",
-          additionalCondition
-      ],
-      "Medical" : [
-          "Drug license displayed prominently",
-           "Bio-medical waste disposal contract",
-            "Refundable security deposit ( after 15-day inspection)",
-          "Valid ID proof copy required.",
-           "Valid GST registration & trade license required",
-          "No structural modifications without written consent",
-          "Maintain exterior cleanliness",
-          "No illegal/subletting activities (immediate termination)",
-         "Signage compliance with local municipal laws",
-         "Business hours restricted to 7AM-11PM",
-         additionalCondition
-      ],
-      "Salon/Spa": [
-        "Weekly sanitization certificate", 
-        "Refundable security deposit ( after 15-day inspection)",
-         "Valid ID proof copy required.",
+        "Valid ID proof copy required.",
         "Valid GST registration & trade license required",
         "No structural modifications without written consent",
         "Maintain exterior cleanliness",
-         "No illegal/subletting activities (immediate termination)",
-         "Signage compliance with local municipal laws",
-         "Business hours restricted to 7AM-11PM",
-         additionalCondition
-      ],
-      "Electronics": [
-        "Voltage stabilizer (100KVA) mandatory", 
-        "Refundable security deposit ( after 15-day inspection)",
-         "Valid ID proof copy required.",
-         "Valid GST registration & trade license required",
-          "No structural modifications without written consent",
-         "Maintain exterior cleanliness",
         "No illegal/subletting activities (immediate termination)",
-         "Signage compliance with local municipal laws",
-        "Business hours restricted to 7AM-11PM", 
-        additionalCondition
-      ]
+        "Signage compliance with local municipal laws",
+        "Business hours restricted to 7AM-11PM",
+        additionalCondition,
+      ],
+      Medical: [
+        "Drug license displayed prominently",
+        "Bio-medical waste disposal contract",
+        "Refundable security deposit ( after 15-day inspection)",
+        "Valid ID proof copy required.",
+        "Valid GST registration & trade license required",
+        "No structural modifications without written consent",
+        "Maintain exterior cleanliness",
+        "No illegal/subletting activities (immediate termination)",
+        "Signage compliance with local municipal laws",
+        "Business hours restricted to 7AM-11PM",
+        additionalCondition,
+      ],
+      "Salon/Spa": [
+        "Weekly sanitization certificate",
+        "Refundable security deposit ( after 15-day inspection)",
+        "Valid ID proof copy required.",
+        "Valid GST registration & trade license required",
+        "No structural modifications without written consent",
+        "Maintain exterior cleanliness",
+        "No illegal/subletting activities (immediate termination)",
+        "Signage compliance with local municipal laws",
+        "Business hours restricted to 7AM-11PM",
+        additionalCondition,
+      ],
+      Electronics: [
+        "Voltage stabilizer (100KVA) mandatory",
+        "Refundable security deposit ( after 15-day inspection)",
+        "Valid ID proof copy required.",
+        "Valid GST registration & trade license required",
+        "No structural modifications without written consent",
+        "Maintain exterior cleanliness",
+        "No illegal/subletting activities (immediate termination)",
+        "Signage compliance with local municipal laws",
+        "Business hours restricted to 7AM-11PM",
+        additionalCondition,
+      ],
     },
     House: {
-      "Furnished": [
+      Furnished: [
         "Penalty per damaged appliance",
         "AC servicing every 3 months (receipts)",
         "No relocation of heavy furniture",
-        "Curtain/drapery dry cleaning before return", 
+        "Curtain/drapery dry cleaning before return",
         "Refundable  security deposit ( after 30-day inspection)",
         "Valid ID copy required",
         "No structural modifications without written consent",
@@ -607,12 +642,13 @@ const ListItem = () => {
         "3-month notice period for vacancy",
         "Police verification certificate mandatory",
         "No illegal/immoral activities (immediate termination)",
-        "Maintain property tax receipts & EB bills",additionalCondition
+        "Maintain property tax receipts & EB bills",
+        additionalCondition,
       ],
-      "Unfurnished": [
+      Unfurnished: [
         "No wall drilling/painting without approval",
         "Floor polishing mandatory before return",
-        "Window grill installation approval required", 
+        "Window grill installation approval required",
         "Refundable  security deposit ( after 30-day inspection)",
         "Valid ID copy required",
         "No structural modifications without written consent",
@@ -620,12 +656,13 @@ const ListItem = () => {
         "3-month notice period for vacancy",
         "Police verification certificate mandatory",
         "No illegal/immoral activities (immediate termination)",
-        "Maintain property tax receipts & EB bills", additionalCondition
+        "Maintain property tax receipts & EB bills",
+        additionalCondition,
       ],
       "Vacation Rental": [
         "Max 8 guests allowed.",
         "Penalty for unauthorized parties",
-        "Staff tips included in rent", 
+        "Staff tips included in rent",
         "Refundable  security deposit ( after 30-day inspection)",
         "Valid ID copy required",
         "No structural modifications without written consent",
@@ -633,13 +670,14 @@ const ListItem = () => {
         "3-month notice period for vacancy",
         "Police verification certificate mandatory",
         "No illegal/immoral activities (immediate termination)",
-        "Maintain property tax receipts & EB bills", additionalCondition
+        "Maintain property tax receipts & EB bills",
+        additionalCondition,
       ],
       "PG/Hostel": [
         "No overnight guests without ID proof",
         "11PM curfew",
         "Weekly room inspection rights",
-        "Shared kitchen cleaning roster", 
+        "Shared kitchen cleaning roster",
         "Refundable  security deposit ( after 30-day inspection)",
         "Valid ID copy required",
         "No structural modifications without written consent",
@@ -647,13 +685,13 @@ const ListItem = () => {
         "3-month notice period for vacancy",
         "Police verification certificate mandatory",
         "No illegal/immoral activities (immediate termination)",
-        "Maintain property tax receipts & EB bills", additionalCondition
-
+        "Maintain property tax receipts & EB bills",
+        additionalCondition,
       ],
-      "Farmhouse": [
+      Farmhouse: [
         "24/7 security guard deployment",
         "No agricultural cultivation without consent",
-        "Water tanker arrangement responsibility", 
+        "Water tanker arrangement responsibility",
         "Refundable  security deposit ( after 30-day inspection)",
         "Valid ID copy required",
         "No structural modifications without written consent",
@@ -661,9 +699,10 @@ const ListItem = () => {
         "3-month notice period for vacancy",
         "Police verification certificate mandatory",
         "No illegal/immoral activities (immediate termination)",
-        "Maintain property tax receipts & EB bills", additionalCondition
+        "Maintain property tax receipts & EB bills",
+        additionalCondition,
       ],
-      "Apartment": [
+      Apartment: [
         "Society rules compliance (noise/parking)",
         "Visitor parking pass system",
         "Balcony safety net installation",
@@ -675,8 +714,9 @@ const ListItem = () => {
         "3-month notice period for vacancy",
         "Police verification certificate mandatory",
         "No illegal/immoral activities (immediate termination)",
-        "Maintain property tax receipts & EB bills",additionalCondition
-      ]
+        "Maintain property tax receipts & EB bills",
+        additionalCondition,
+      ],
     },
     Tools: {
       "Power Tools": [
@@ -684,56 +724,61 @@ const ListItem = () => {
         "Blade/disc replacement at 50% wear",
         "Dust management system required",
         "Refundablesecurity deposit ( after 3-day inspection)",
-         "Use only manufacturer-approved accessories",
+        "Use only manufacturer-approved accessories",
         "No modifications to original equipment",
         "Environmental compliance - proper disposal of waste/debris",
-        "Penalty for misuse", additionalCondition
-        
+        "Penalty for misuse",
+        additionalCondition,
       ],
       "Gardening Tools": [
         "No cross-contamination of pesticides/fertilizers",
-        "Water usage log for irrigation equipment", 
-          "Refundablesecurity deposit ( after 3-day inspection)",
-         "Use only manufacturer-approved accessories",
-       "No modifications to original equipment",
+        "Water usage log for irrigation equipment",
+        "Refundablesecurity deposit ( after 3-day inspection)",
+        "Use only manufacturer-approved accessories",
+        "No modifications to original equipment",
         "Environmental compliance - proper disposal of waste/debris",
-       "Penalty for misuse", additionalCondition
+        "Penalty for misuse",
+        additionalCondition,
       ],
       "Construction Tools": [
         "Concrete mixer cleaning after each use",
-        "No worksite sharing without approval", 
+        "No worksite sharing without approval",
         "Refundablesecurity deposit ( after 3-day inspection)",
         "Use only manufacturer-approved accessories",
         "No modifications to original equipment",
         "Environmental compliance - proper disposal of waste/debris",
-        "Penalty for misuse", additionalCondition
+        "Penalty for misuse",
+        additionalCondition,
       ],
       "Measuring Tools": [
-        "No exposure to magnetic fields", 
+        "No exposure to magnetic fields",
         "Refundablesecurity deposit ( after 3-day inspection)",
         "Use only manufacturer-approved accessories",
         "No modifications to original equipment",
-         "Environmental compliance - proper disposal of waste/debris",
-        "Penalty for misuse", additionalCondition
+        "Environmental compliance - proper disposal of waste/debris",
+        "Penalty for misuse",
+        additionalCondition,
       ],
       "Mechanical Tools": [
         "Torque setting verification before use",
         "No disassembly of sealed components",
-        "Gear oil grade compliance check", 
+        "Gear oil grade compliance check",
         "Refundablesecurity deposit ( after 3-day inspection)",
         "Use only manufacturer-approved accessories",
-       "No modifications to original equipment",
-       "Environmental compliance - proper disposal of waste/debris",
-        "Penalty for misuse", additionalCondition
+        "No modifications to original equipment",
+        "Environmental compliance - proper disposal of waste/debris",
+        "Penalty for misuse",
+        additionalCondition,
       ],
       "Painting Tools": [
         "No mixing of incompatible paints",
-        "Nozzle cleaning certification after use", 
+        "Nozzle cleaning certification after use",
         "Refundablesecurity deposit ( after 3-day inspection)",
         "Use only manufacturer-approved accessories",
-         "No modifications to original equipment",
-         "Environmental compliance - proper disposal of waste/debris",
-         "Penalty for misuse", additionalCondition
+        "No modifications to original equipment",
+        "Environmental compliance - proper disposal of waste/debris",
+        "Penalty for misuse",
+        additionalCondition,
       ],
     },
   };
@@ -775,14 +820,24 @@ const ListItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
-    
+
     // Required fields validation
-    if (!formData.title || !formData.description || !formData.price || !formData.securityDeposit || !formData.rentType || 
-        !category || !subcategory || !state || !city || formData.images.length === 0) {
+    if (
+      !formData.title ||
+      !formData.description ||
+      !formData.price ||
+      !formData.securityDeposit ||
+      !formData.rentType ||
+      !category ||
+      !subcategory ||
+      !state ||
+      !city ||
+      formData.images.length === 0
+    ) {
       alert("Please fill in all required fields and add at least one image");
       return;
     }
-  
+
     // Append form fields
     data.append("title", formData.title);
     data.append("description", formData.description);
@@ -795,31 +850,36 @@ const ListItem = () => {
     data.append("city", city);
     data.append("location", `${city}, ${state}`);
     data.append("userId", authService.getCurrentUser().user.id);
-  
+
     // Append conditions
     if (formData.condition.length > 0) {
-      formData.condition.forEach(cond => {
+      formData.condition.forEach((cond) => {
         data.append("item_condition", cond);
       });
     }
-  
+
     // Append images
-    formData.images.forEach(image => {
+    formData.images.forEach((image) => {
       data.append("images", image);
     });
-  
+
     try {
       console.log("Submitting data:", Object.fromEntries(data));
-      
-      const response = await axios.post("http://localhost:5000/api/listings", data, {
-        headers: { 
-          "Content-Type": "multipart/form-data"
+
+      const response = await axios.post(
+        "http://localhost:5000/api/listings",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
-      });
-  
+      );
+
       console.log("Server Response:", response.data);
-      
+
       if (response.data.item) {
+        authService.addRole(authService.getCurrentUser().user.id, "Lister");
         alert("Item Listed Successfully!");
         // Reset form
         setFormData({
@@ -829,7 +889,7 @@ const ListItem = () => {
           securityDeposit: "",
           rentType: "",
           condition: [],
-          images: []
+          images: [],
         });
         setCategory("");
         setSubcategory("");
@@ -838,7 +898,10 @@ const ListItem = () => {
       }
     } catch (error) {
       console.error("Error details:", error.response?.data || error.message);
-      alert("Failed to list item: " + (error.response?.data?.message || error.message));
+      alert(
+        "Failed to list item: " +
+          (error.response?.data?.message || error.message)
+      );
     }
   };
 
@@ -849,26 +912,26 @@ const ListItem = () => {
         <Form.Group className="mb-3 form-group">
           <Form.Label className="form-label">Select Category *</Form.Label>
           <div className="custom-select">
-            <Form.Select 
+            <Form.Select
               className="form-control"
-              value={category} 
+              value={category}
               onChange={(e) => {
                 setCategory(e.target.value);
                 setSubcategory("");
               }}
               required
               style={{
-                appearance:'none'
+                appearance: "none",
               }}
             >
               <option value="" disabled className="placeholder-option">
                 Choose a category
               </option>
               {Object.keys(conditions).map((cat) => (
-                <option 
-                  key={cat} 
+                <option
+                  key={cat}
                   value={cat}
-                  style={{ color: 'var(--forest-deep)' }}
+                  style={{ color: "var(--forest-deep)" }}
                 >
                   {cat}
                 </option>
@@ -881,28 +944,28 @@ const ListItem = () => {
           <Form.Group className="mb-3 form-group">
             <Form.Label className="form-label">Select Subcategory *</Form.Label>
             <div className="custom-select">
-              <Form.Select 
+              <Form.Select
                 className="form-control"
-                value={subcategory} 
+                value={subcategory}
                 onChange={(e) => setSubcategory(e.target.value)}
                 required
                 style={{
-                  border: '2px solid var(--sea-foam)',
-                  borderRadius: '12px',
-                  backgroundColor: 'var(--ivory-white)',
-                  color: 'var(--deep-emerald)',
-                  padding: '1rem 1.5rem',
-                  appearance: 'none'
+                  border: "2px solid var(--sea-foam)",
+                  borderRadius: "12px",
+                  backgroundColor: "var(--ivory-white)",
+                  color: "var(--deep-emerald)",
+                  padding: "1rem 1.5rem",
+                  appearance: "none",
                 }}
               >
                 <option value="" disabled className="placeholder-option">
                   Choose a subcategory
                 </option>
                 {Object.keys(conditions[category]).map((sub) => (
-                  <option 
-                    key={sub} 
+                  <option
+                    key={sub}
                     value={sub}
-                    style={{ color: 'var(--forest-deep)' }}
+                    style={{ color: "var(--forest-deep)" }}
                   >
                     {sub}
                   </option>
@@ -914,7 +977,14 @@ const ListItem = () => {
 
         <Form.Group className="mb-3">
           <Form.Label>Name of the Product*</Form.Label>
-          <Form.Control type="text" name="title" placeholder="e.g., (Car name)" onChange={(e) => setFormData({ ...formData, title: e.target.value })} />
+          <Form.Control
+            type="text"
+            name="title"
+            placeholder="e.g., (Car name)"
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
+          />
         </Form.Group>
 
         <Form.Group className="mb-3">
@@ -926,31 +996,57 @@ const ListItem = () => {
             placeholder="Item Details "
             value={formData.description}
             onChange={(e) => {
-              const words = e.target.value.split(/\s+/).filter(word => word.length > 0); // Split words by spaces
+              const words = e.target.value
+                .split(/\s+/)
+                .filter((word) => word.length > 0); // Split words by spaces
               if (words.length <= 100) {
                 setFormData({ ...formData, description: e.target.value });
               }
             }}
           />
           <small className="text-muted">
-            {formData.description.split(/\s+/).filter(word => word.length > 0).length} / 100 words
+            {
+              formData.description
+                .split(/\s+/)
+                .filter((word) => word.length > 0).length
+            }{" "}
+            / 100 words
           </small>
         </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Label>Price (per day/week/month) *</Form.Label>
-          <Form.Control type="number" name="price" placeholder="Enter rental price" onChange={(e) => setFormData({ ...formData, price: e.target.value })} />
+          <Form.Control
+            type="number"
+            name="price"
+            placeholder="Enter rental price"
+            onChange={(e) =>
+              setFormData({ ...formData, price: e.target.value })
+            }
+          />
         </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Label>Security Deposit *</Form.Label>
-          <Form.Control type="number" name="securityDeposit" placeholder="Enter deposit amount" onChange={(e) => setFormData({ ...formData, securityDeposit: e.target.value })} />
+          <Form.Control
+            type="number"
+            name="securityDeposit"
+            placeholder="Enter deposit amount"
+            onChange={(e) =>
+              setFormData({ ...formData, securityDeposit: e.target.value })
+            }
+          />
         </Form.Group>
 
         {/* Added Rent Type Dropdown */}
         <Form.Group className="mb-3">
           <Form.Label>Rent Type *</Form.Label>
-          <Form.Select value={formData.rentType} onChange={(e) => setFormData({ ...formData, rentType: e.target.value })}>
+          <Form.Select
+            value={formData.rentType}
+            onChange={(e) =>
+              setFormData({ ...formData, rentType: e.target.value })
+            }
+          >
             <option value="">Choose rent type</option>
             <option value="Daily">Day</option>
             <option value="Weekly">Week</option>
@@ -963,20 +1059,29 @@ const ListItem = () => {
           <Form.Select value={state} onChange={(e) => setState(e.target.value)}>
             <option value="">Choose a state</option>
             {states.map((s) => (
-              <option key={s} value={s}>{s}</option>
+              <option key={s} value={s}>
+                {s}
+              </option>
             ))}
           </Form.Select>
         </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Label>City *</Form.Label>
-          <Form.Control type="text" name="city" placeholder="Enter city/locality" onChange={(e) => setCity(e.target.value)} />
+          <Form.Control
+            type="text"
+            name="city"
+            placeholder="Enter city/locality"
+            onChange={(e) => setCity(e.target.value)}
+          />
         </Form.Group>
 
         {subcategory && conditions[category]?.[subcategory] && (
           <Form.Group className="mb-3">
             <Form.Label>Condition *</Form.Label>
-            <div className="d-flex flex-column"> {/* Ensures proper alignment */}
+            <div className="d-flex flex-column">
+              {" "}
+              {/* Ensures proper alignment */}
               {conditions[category][subcategory].map((cond) => (
                 <Form.Check
                   key={cond}
@@ -985,7 +1090,7 @@ const ListItem = () => {
                   value={cond}
                   onChange={handleConditionChange}
                   checked={formData.condition.includes(cond)}
-                  className="mb-2 small-checkbox"// Adds spacing between checkboxes
+                  className="mb-2 small-checkbox" // Adds spacing between checkboxes
                 />
               ))}
             </div>
@@ -995,9 +1100,16 @@ const ListItem = () => {
         {/* Image Upload Field */}
         <Form.Group className="mb-3">
           <Form.Label>Upload Images (Min 1, Max 10) *</Form.Label>
-          <Form.Control type="file" accept="image/*" multiple onChange={handleImageChange} />
+          <Form.Control
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleImageChange}
+          />
           <small className="text-muted">
-            {formData.images.length === 0 ? "Maximum 10 photos" : `${formData.images.length} photos selected`}
+            {formData.images.length === 0
+              ? "Maximum 10 photos"
+              : `${formData.images.length} photos selected`}
           </small>
           {errorMessage && <p className="text-danger mt-1">{errorMessage}</p>}
         </Form.Group>
@@ -1012,7 +1124,11 @@ const ListItem = () => {
                   src={URL.createObjectURL(image)}
                   alt={`Preview ${index}`}
                   className="rounded border"
-                  style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                  }}
                 />
               ) : (
                 // If the image is already uploaded, fetch it from backend
@@ -1020,7 +1136,11 @@ const ListItem = () => {
                   src={`http://localhost:5000/images/${image}`}
                   alt={`Uploaded ${index}`}
                   className="rounded border"
-                  style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                  }}
                 />
               )}
               <Button

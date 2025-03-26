@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
+import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 const ItemPage = () => {
-  const { itemId } = useParams(); // Get category from URL
+  const { itemId } = useParams();
   const [item, setItem] = useState({});
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const ItemPage = () => {
           <Button
             variant="success"
             style={{ width: "100%", marginTop: 20, height: 50 }}
-            onClick={() => navigate("/address")} // Now navigate is defined
+            onClick={() => navigate(`/selectdates/${itemId}`)}
           >
             Rent Now
           </Button>

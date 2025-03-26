@@ -14,6 +14,9 @@ import Signup from "./components/auth/Signup";
 import ItemPage from "./components/categories/ItemPage";
 import MyListingsPage from "./components/categories/MyListingsPage";
 import AddressPage from "./components/categories/AddressPage";
+import SelectDatesPage from "./components/categories/SelectDatesPage";
+import PaymentGateway from "./components/categories/PaymentGateway";
+import PaymentSuccess from "./components/categories/PaymentSuccess";
 
 
 function App() {
@@ -38,8 +41,10 @@ function App() {
         <Route path="/my-listings" element={<MyListingsPage />} />
         <Route path="/item/:itemId" element={<ItemPage />} />
         <Route path="/address" element={<AddressPage />} />
+        <Route path="/selectdates/:itemId" element={<SelectDatesPage />} />
+        <Route path="/paymentgateway" element={<PaymentGateway />} />
+        <Route path="/paymentstatus" element={<PaymentSuccess />} />
       </Routes>
-
     </Router>
   );
 }

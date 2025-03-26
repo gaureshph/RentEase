@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const indianStates = [
     "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
@@ -10,6 +11,7 @@ const indianStates = [
     "Uttar Pradesh", "Uttarakhand", "West Bengal"
   ];
 const AddressPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
@@ -27,7 +29,7 @@ const AddressPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Address Submitted:", formData);
-    alert("Address saved successfully!");
+    navigate("/paymentgateway");
   };
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, "").slice(0, 10);
@@ -121,12 +123,9 @@ const AddressPage = () => {
             </Form.Group>
           </Col>
         </Row>
-        <Form.Group className="mb-3">
-          
-         
-          
+        <Form.Group className="mb-3">                  
         </Form.Group>
-        <Button variant="primary" type="submit">Save Address</Button>
+        <Button variant="primary" type="submit">Proceed To Payment</Button>
       </Form>
     </Container>
   );
