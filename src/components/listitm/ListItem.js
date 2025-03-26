@@ -14,6 +14,7 @@ const ListItem = () => {
   const [formData, setFormData] = useState({
     description: "",
     price: "",
+    securityDeposit: "",
     rentType: "",
     category: "",
     subcategory: "",
@@ -776,7 +777,7 @@ const ListItem = () => {
     const data = new FormData();
     
     // Required fields validation
-    if (!formData.title || !formData.description || !formData.price || !formData.rentType || 
+    if (!formData.title || !formData.description || !formData.price || !formData.securityDeposit || !formData.rentType || 
         !category || !subcategory || !state || !city || formData.images.length === 0) {
       alert("Please fill in all required fields and add at least one image");
       return;
@@ -786,6 +787,7 @@ const ListItem = () => {
     data.append("title", formData.title);
     data.append("description", formData.description);
     data.append("price", formData.price);
+    data.append("securityDeposit", formData.securityDeposit);
     data.append("rentType", formData.rentType);
     data.append("category", category);
     data.append("subcategory", subcategory);
@@ -824,6 +826,7 @@ const ListItem = () => {
           title: "",
           description: "",
           price: "",
+          securityDeposit: "",
           rentType: "",
           condition: [],
           images: []
@@ -937,6 +940,11 @@ const ListItem = () => {
         <Form.Group className="mb-3">
           <Form.Label>Price (per day/week/month) *</Form.Label>
           <Form.Control type="number" name="price" placeholder="Enter rental price" onChange={(e) => setFormData({ ...formData, price: e.target.value })} />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Security Deposit *</Form.Label>
+          <Form.Control type="number" name="securityDeposit" placeholder="Enter deposit amount" onChange={(e) => setFormData({ ...formData, securityDeposit: e.target.value })} />
         </Form.Group>
 
         {/* Added Rent Type Dropdown */}

@@ -11,7 +11,7 @@ import { FaSearch, FaUserCircle, FaMapMarkerAlt, FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import authService from "../../services/authService";
 import "../css/header.css";
-import icon from "../../images/icon.jpeg";
+import icon from "../../images/icon-square.jpeg";
 
 const RentEaseNavbar = () => {
   const navigate = useNavigate();
@@ -78,10 +78,36 @@ const RentEaseNavbar = () => {
             id="location-dropdown"
             className="text-white me-3"
           >
-            <NavDropdown.Item href="#bangalore">Bangalore</NavDropdown.Item>
-            <NavDropdown.Item href="#mumbai">Mumbai</NavDropdown.Item>
-            <NavDropdown.Item href="#pune">Pune</NavDropdown.Item>
-          </NavDropdown>
+            <NavDropdown title="States of India" style={{ maxHeight: "200px", overflowY: "auto" }}></NavDropdown>
+             <NavDropdown.Item href="#andhra-pradesh">Andhra Pradesh</NavDropdown.Item>
+  <NavDropdown.Item href="#arunachal-pradesh">Arunachal Pradesh</NavDropdown.Item>
+  <NavDropdown.Item href="#assam">Assam</NavDropdown.Item>
+  <NavDropdown.Item href="#bihar">Bihar</NavDropdown.Item>
+  <NavDropdown.Item href="#chhattisgarh">Chhattisgarh</NavDropdown.Item>
+  <NavDropdown.Item href="#goa">Goa</NavDropdown.Item>
+  <NavDropdown.Item href="#gujarat">Gujarat</NavDropdown.Item>
+  <NavDropdown.Item href="#haryana">Haryana</NavDropdown.Item>
+  <NavDropdown.Item href="#himachal-pradesh">Himachal Pradesh</NavDropdown.Item>
+  <NavDropdown.Item href="#jharkhand">Jharkhand</NavDropdown.Item>
+  <NavDropdown.Item href="#karnataka">Karnataka</NavDropdown.Item>
+  <NavDropdown.Item href="#kerala">Kerala</NavDropdown.Item>
+  <NavDropdown.Item href="#madhya-pradesh">Madhya Pradesh</NavDropdown.Item>
+  <NavDropdown.Item href="#maharashtra">Maharashtra</NavDropdown.Item>
+  <NavDropdown.Item href="#manipur">Manipur</NavDropdown.Item>
+  <NavDropdown.Item href="#meghalaya">Meghalaya</NavDropdown.Item>
+  <NavDropdown.Item href="#mizoram">Mizoram</NavDropdown.Item>
+  <NavDropdown.Item href="#nagaland">Nagaland</NavDropdown.Item>
+  <NavDropdown.Item href="#odisha">Odisha</NavDropdown.Item>
+  <NavDropdown.Item href="#punjab">Punjab</NavDropdown.Item>
+  <NavDropdown.Item href="#rajasthan">Rajasthan</NavDropdown.Item>
+  <NavDropdown.Item href="#sikkim">Sikkim</NavDropdown.Item>
+  <NavDropdown.Item href="#tamil-nadu">Tamil Nadu</NavDropdown.Item>
+  <NavDropdown.Item href="#telangana">Telangana</NavDropdown.Item>
+  <NavDropdown.Item href="#tripura">Tripura</NavDropdown.Item>
+  <NavDropdown.Item href="#uttar-pradesh">Uttar Pradesh</NavDropdown.Item>
+  <NavDropdown.Item href="#uttarakhand">Uttarakhand</NavDropdown.Item>
+  <NavDropdown.Item href="#west-bengal">West Bengal</NavDropdown.Item>
+</NavDropdown>
 
           {/* List Button */}
           <Button
